@@ -1,6 +1,6 @@
 # Tuntut
 
-**Find what you may be owed, understand it, and practise the safest next step.**
+**You've got unclaimed money sitting somewhere. Time to bring it home.**
 
 Tuntut is a synthetic demonstration of a simpler way to navigate Malaysian assistance, benefits, and unclaimed-money services. It brings several programme results into one claim map, explains what each result means in plain language, and lets the user practise the next step before visiting an official service.
 
