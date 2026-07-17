@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tuntut-static",
+      "comment": "Testing only — the app is built to run by double-clicking app/index.html. Any port will do, so take whatever is assigned.",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server ${PORT:-8055}"],
+      "port": 8055,
+      "autoPort": true
+    }
+  ]
+}

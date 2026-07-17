@@ -1,0 +1,45 @@
+/* Landing + no-results — centred, single-column "entry" screens.
+   Sign-up is no longer a page: it's a modal on the last carousel slide. */
+
+.entry{min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:clamp(24px,6vw,56px) clamp(16px,4vw,24px); text-align:center}
+.entry-inner{width:100%; max-width:560px}
+.entry .wordmark{font-size:clamp(34px,6vw,44px); display:inline-block; margin-bottom:22px}
+
+.entry h1{font-family:var(--display); font-weight:700; color:var(--head); letter-spacing:-.03em;
+  font-size:clamp(1.9rem,4.6vw,2.9rem); line-height:1.1; margin:0 0 14px}
+.entry .lede{color:var(--muted); margin:0 auto 32px; max-width:44ch}
+.entry .lede b{color:var(--pos); font-weight:700}
+
+/* ---- the IC field ---- */
+.field{display:flex; gap:10px; align-items:stretch; background:var(--paper);
+  border:var(--hairline) solid var(--line); border-radius:var(--radius); padding:10px;
+  box-shadow:var(--shadow); text-align:left}
+.field input{flex:1; min-width:0; border:0; outline:0; background:transparent; color:var(--ink);
+  font-family:var(--num); font-variant-numeric:tabular-nums; font-size:clamp(15px,2.4vw,18px);
+  letter-spacing:.06em; padding:12px 14px}
+.field input::placeholder{color:var(--faint); letter-spacing:.06em}
+.field:focus-within{border-color:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 12%, transparent), var(--shadow)}
+.field .btn{flex:0 0 auto}
+
+.field-note{display:flex; align-items:center; justify-content:center; gap:8px;
+  margin:14px 0 0; font-size:12.5px; color:var(--faint)}
+.err{margin:12px 0 0; font-size:13px; font-weight:600; color:var(--accent); min-height:1.2em}
+
+.trust{margin-top:34px; padding-top:24px; border-top:var(--hairline) solid var(--line);
+  font-size:12.5px; color:var(--muted); line-height:1.6}
+.trust b{color:var(--ink)}
+
+/* ---- loading state ---- */
+.loading{display:none}
+.loading.on{display:block; animation:rise .4s ease both}
+.entry.busy .idle{display:none}
+
+.ticks{list-style:none; margin:22px auto 0; padding:0; max-width:330px; text-align:left}
+.ticks li{display:flex; align-items:center; gap:11px; padding:9px 0; font-size:14px;
+  color:var(--faint); border-bottom:var(--hairline) solid var(--line-2); opacity:.45; transition:.3s}
+.ticks li:last-child{border-bottom:0}
+.ticks li::before{content:"○"; color:var(--faint); font-size:13px; width:14px}
+.ticks li.done{opacity:1; color:var(--ink)}
+.ticks li.done::before{content:"✓"; color:var(--pos); font-weight:700}
+
