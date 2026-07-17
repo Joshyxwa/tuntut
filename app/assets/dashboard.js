@@ -23,7 +23,7 @@
       '<p class="sub">Across <b>' + t.schemeCount + " schemes</b>, in two kinds:</p>" +
       Tuntut.split() +
       '<div class="cta-row">' +
-        '<a class="btn btn-primary" href="#">Claim ' + Tuntut.rm(t.needsApplying) + " →</a>" +
+        '<a class="btn btn-primary" href="guide.html?platform=egumis">Claim ' + Tuntut.rm(t.needsApplying) + " →</a>" +
       "</div>" +
     "</div>" +
     '<div class="mini">' +

@@ -80,7 +80,7 @@ window.TUNTUT_DATA = {
       caption: "Held by KWSP & two former employers. It needs Form UMA-7 — Tuntut fills it in, you just sign. Full amount revealed after you connected your MyDigital ID.",
       status: "good", statusLabel: "Money found",
       source: "egumis.anm.gov.my",
-      link: { label: "Prepare my UMA-7 →", href: "#" },
+      link: { label: "Prepare my UMA-7 →", href: "guide.html?platform=egumis" },
       mini: { label: "eGUMIS — unclaimed money", value: "RM 3,410", pos: true },
       simple: {
         kicker: "The big one",
@@ -102,7 +102,7 @@ window.TUNTUT_DATA = {
       bar: { pct: 34, kind: "warn", left: "Expires in 20 days", right: "30 Jun" },
       expiry: { inDays: 20, date: "30 Jun" },
       source: "mykasih.net",
-      link: { label: "Find nearest kedai →", href: "#" },
+      link: { label: "Find nearest kedai →", href: "guide.html?platform=sara" },
       mini: { label: "SARA — grocery credit", value: "RM 38" },
       simple: {
         kicker: "Use it or lose it",
@@ -174,7 +174,7 @@ window.TUNTUT_DATA = {
       desc: "Free health screening for B40 aged 40+. You qualify — a clinic visit activates it.",
       status: "warn", statusLabel: "Action needed",
       source: "pekab40",
-      link: { label: "We'll help you book →", href: "#" },
+      link: { label: "We'll help you book →", href: "guide.html?platform=peka" },
       mini: { label: "PeKa B40 — free screening", pill: true },
       simple: {
         kicker: "One visit away",
