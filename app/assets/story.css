@@ -1,0 +1,168 @@
+/* Carousel / "simple view" — one idea per screen. */
+
+/* The carousel owns exactly one screenful and never scrolls the page. The card,
+   the button and the dots are one object: if you have to scroll to find the way
+   forward, the design has failed. So the height is the viewport's, not the
+   content's, and everything inside fits it.
+
+   The body is the flex column rather than the story subtracting a fixed topbar
+   height: the topbar wraps to two lines on a narrow screen, so any hardcoded
+   number is wrong exactly where it hurts. Let the browser do the subtraction. */
+html,body{height:100%}
+body{display:flex; flex-direction:column}
+.topbar{flex:0 0 auto}
+
+.story{flex:1 1 auto; min-height:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; overflow:hidden;
+  padding:clamp(12px,2.5vh,28px) clamp(16px,4vw,24px)}
+
+/* Fixed frame, on purpose. Slides carry wildly different amounts of copy, and
+   if the card resized the Next button would move under the user's finger every
+   click. Our audience is elderly — the target must never walk away.
+
+   "Fixed" means identical on every slide, not one magic number: the card takes
+   whatever height the window leaves (capped at 600), so it fits a short laptop
+   without the button falling off the bottom. Every slide still gets the same
+   box, which is the promise that matters. */
+/* The cap stops the card ballooning on a tall monitor. It has to clear the
+   busiest slide (the intro: big number + heading + both split rows) or that
+   slide alone starts scrolling inside — which is how you get a card that looks
+   fine on every screen except the first one anyone sees. */
+.story-inner{width:560px; max-width:100%; height:100%; max-height:730px;
+  display:flex; flex-direction:column}
+#slide{flex:1 1 auto; min-height:0; display:flex}
+
+/* progress */
+.dots{flex:0 0 auto; display:flex; gap:7px; justify-content:center; margin-bottom:clamp(10px,2vh,22px)}
+.dots i{width:7px; height:7px; border-radius:99px; background:var(--line); transition:.25s}
+.dots i.on{background:var(--accent); width:22px}
+.dots i.seen{background:color-mix(in srgb,var(--accent) 45%, transparent)}
+
+/* slide — Paper Premium card, but the verdict is a colour band up top so the
+   answer lands before you read a word. */
+.slide{flex:1; min-height:0; background:var(--paper); border:var(--hairline) solid var(--line);
+  border-radius:var(--radius); box-shadow:var(--shadow); text-align:center; overflow:hidden;
+  display:flex; flex-direction:column}
+
+/* the status band */
+.band{flex:0 0 auto; padding:clamp(14px,2.4vh,22px) 20px clamp(12px,2vh,20px);
+  display:flex; flex-direction:column; align-items:center; gap:clamp(7px,1.4vh,12px)}
+/* -deep variants: these carry white text, so they must clear 4.5:1 */
+.band.good{background:var(--pos-deep)}
+.band.warn{background:var(--gold-deep)}
+.band.bad {background:var(--bad-deep)}
+.band.accent{background:var(--accent)}
+.band .label{font-size:15px; font-weight:700; letter-spacing:.03em; color:var(--paper)}
+
+/* min-height:0 lets this shrink inside the card rather than push the band off
+   the top. Nothing here should ever actually scroll — if it does, the copy is
+   too long for the smallest screen we support and the copy is what should give. */
+.slide-body{flex:1; min-height:0; overflow:auto; padding:clamp(16px,3vh,34px) clamp(20px,4vw,34px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center}
+
+.slide .kicker{font-size:11px; font-weight:700; letter-spacing:var(--eyebrow-ls);
+  text-transform:uppercase; color:var(--muted); margin:0 0 14px}
+
+.slide h2{font-family:var(--display); font-weight:700; color:var(--head); letter-spacing:-.025em;
+  font-size:clamp(1.5rem,4vw,2.1rem); line-height:1.15; margin:0 0 14px}
+.slide p{margin:0; color:var(--muted); max-width:36ch}
+/* --muted, not --faint: this line carries the money value on some slides, and
+   --faint is 2.6:1 on paper — it fails AA. Quiet is fine; unreadable isn't. */
+.slide .foot-line{margin-top:20px; padding-top:16px; border-top:var(--hairline) solid var(--line-2);
+  font-size:13px; color:var(--muted); width:100%; max-width:36ch}
+/* "what's it worth to me?" — the answer, so it gets the money cue */
+.slide .worth{font-family:var(--num); font-weight:700; color:var(--gold-deep);
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+
+/* the big number slide */
+.slide .mega{font-family:var(--num-hero); font-weight:700; letter-spacing:-.03em; line-height:.9;
+  font-size:clamp(3.4rem,11vw,5.2rem); color:var(--head); font-variant-numeric:tabular-nums; margin:6px 0 14px}
+.slide .mega small{font-size:.3em; font-weight:600; color:var(--muted); vertical-align:.7em; margin-right:.12em; letter-spacing:0}
+
+/* the final claim slide keeps the gold band */
+.slide .tag{margin-bottom:16px}
+
+/* the two piles, on the intro and final slides */
+.slide .split{max-width:340px; margin-top:18px; border-top:var(--hairline) solid var(--line-2)}
+.slide .mega + .split{margin-top:22px}
+.slide .total{display:flex; align-items:baseline; justify-content:center; gap:9px; width:100%;
+  max-width:340px; margin-top:16px; padding-top:14px; border-top:var(--hairline) solid var(--line-2)}
+.slide .total span{font-size:12px; letter-spacing:var(--eyebrow-ls); text-transform:uppercase;
+  font-weight:700; color:var(--faint)}
+.slide .total b{font-family:var(--num-hero); font-size:20px; color:var(--head); letter-spacing:-.02em}
+
+/* nav */
+.nav{flex:0 0 auto; display:flex; align-items:center; gap:12px; margin-top:clamp(12px,2.2vh,22px)}
+.nav .btn-primary{flex:1}
+.nav .back{flex:0 0 auto; background:transparent; border:var(--hairline) solid var(--line); color:var(--muted);
+  width:46px; height:46px; padding:0; border-radius:var(--radius-sm); font-size:17px; cursor:pointer; transition:.18s;
+  display:inline-flex; align-items:center; justify-content:center}
+.nav .back:hover:not(:disabled){background:var(--sunk); color:var(--ink)}
+.nav .back:disabled{opacity:.35; cursor:not-allowed}
+
+.hint{flex:0 0 auto; text-align:center; margin:clamp(8px,1.4vh,16px) 0 0; font-size:11.5px; color:var(--faint)}
+/* Short screen: the hint is the least valuable thing here — it goes first so
+   the card and the button never have to. (It's also arrow-key advice, which is
+   useless on the touch devices that hit this breakpoint.) */
+@media (max-height:700px){ .hint{display:none} }
+
+.claim-note{margin-top:14px; font-size:12.5px; color:var(--faint); max-width:34ch}
+
+/* ---- the sign-up modal ----
+   A native <dialog>: focus trap, Esc, inert background and the top layer all
+   come free and correct. Reaching for a div here would mean rebuilding them. */
+.sheet{width:420px; max-width:calc(100vw - 32px); padding:0; border:0; background:transparent; overflow:visible}
+.sheet::backdrop{background:color-mix(in srgb,var(--head) 55%, transparent); backdrop-filter:blur(3px)}
+.sheet[open]{animation:rise .3s cubic-bezier(.2,.7,.3,1) both}
+
+.sheet-inner{background:var(--paper); border:var(--hairline) solid var(--line);
+  border-radius:var(--radius); box-shadow:var(--shadow); padding:clamp(22px,4vw,30px); text-align:left}
+.sheet h2{font-family:var(--display); font-weight:700; color:var(--head); letter-spacing:-.025em;
+  font-size:1.5rem; line-height:1.15; margin:0 0 10px}
+.sheet .lead{margin:0 0 20px; color:var(--muted); font-size:13.5px}
+.sheet .lead b{color:var(--ink)}
+
+/* Provider buttons. Deliberately not brand-coloured: they're mock, and a
+   pixel-perfect Google button would be a lie the user can't see through. */
+.sheet .prov{width:100%; justify-content:flex-start; gap:12px; margin-bottom:10px; padding:13px 16px}
+.sheet .prov .ic{width:20px; height:20px; flex:0 0 auto}
+.sheet .close{margin-top:6px; width:100%; background:transparent; border:0; color:var(--faint);
+  font-family:var(--body); font-size:12.5px; cursor:pointer; padding:8px}
+.sheet .close:hover{color:var(--ink); text-decoration:underline}
+.sheet .guard{margin-top:18px; padding:14px 16px; font-size:11.5px}
+.sheet .guard .shield{font-size:16px}
+
+.sheet .busy{display:none; text-align:center; padding:26px 0 20px}
+.sheet.working .idle{display:none}
+.sheet.working .busy{display:block; animation:rise .3s ease both}
+.sheet .busy p{margin:0; font-size:13.5px; color:var(--muted)}
+
+/* ---- short screens ----
+   A 13" laptop is ~700px tall, and after the browser chrome the page gets
+   ~650. Everything below is about buying back vertical pixels so the card and
+   its button still fit in one view, in this order: gaps, then the glyph, then
+   type. The layout above already flexes; these just stop it from clipping. */
+@media (max-height:760px){
+  .slide h2{font-size:clamp(1.35rem,3.2vw,1.75rem); margin-bottom:10px}
+  .slide .mega{font-size:clamp(2.8rem,8vw,4rem); margin:2px 0 8px}
+  .glyph.lg{width:52px; height:52px; font-size:27px}
+  .slide .foot-line{margin-top:14px; padding-top:11px}
+  .slide .split{margin-top:12px}
+  .split .row{padding:9px 0}
+  .split .amt{font-size:23px}
+  .slide .total{margin-top:11px; padding-top:10px}
+  .claim-note{margin-top:9px}
+  .slide .kicker{margin-bottom:9px}
+}
+@media (max-height:700px){
+  .glyph.lg{width:42px; height:42px; font-size:22px}
+  .slide h2{font-size:clamp(1.15rem,3vw,1.5rem)}
+  .slide .mega{font-size:clamp(2.2rem,7vw,3.2rem)}
+  .split .amt{font-size:20px}
+  .slide p{font-size:13.5px}
+  .split .txt{font-size:11.5px}
+  .split .row{padding:7px 0; gap:10px}
+  .glyph.md{width:26px; height:26px; font-size:15px}
+  .slide .foot-line{margin-top:11px; padding-top:9px; font-size:12px}
+  .band{padding:11px 20px 10px}
+}
