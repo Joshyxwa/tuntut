@@ -216,7 +216,7 @@
       return;
     }
 
-    if (event.target.closest("[data-dashboard]")) location.href = "dashboard.html";
+    if (event.target.closest("[data-dashboard]")) location.href = "dashboard.html?done=" + activePlatformId;
   });
 
   portalScreen.addEventListener("input", updateRequiredState);

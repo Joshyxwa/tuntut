@@ -36,6 +36,11 @@ body{padding-bottom:60px}
   background:color-mix(in srgb,var(--paper) 55%, transparent)}
 .lockmask p{margin:0; font-size:13px; color:var(--muted); max-width:22ch}
 
+/* Green tick for the "claim lined up" card. Shares the .notready dialog chrome
+   (blur, card, button) from theme.css; only this mark is dashboard-specific. */
+.claim-done-mark{width:64px; height:64px; border-radius:50%; display:grid; place-items:center;
+  background:var(--pos-soft); color:var(--pos-deep); font-size:34px; font-weight:800; margin:0 0 10px}
+
 /* ---- the claim panel ---- */
 .claim{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; padding:clamp(20px,3vw,28px);
   border-radius:var(--radius); background:var(--paper); border:var(--hairline) solid var(--line);

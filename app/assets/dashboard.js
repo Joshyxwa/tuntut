@@ -72,6 +72,38 @@
     '<span class="shield">🛡️</span><div><b>' + esc(d.guardrail.lead) + "</b> " + esc(d.guardrail.body) + "</div>";
   document.getElementById("foot").textContent = d.meta.figuresNote + " · " + d.meta.brand;
 
+  // ---- "claim lined up" celebration ----
+  // The guide sends us back with ?done=<platform> when a flow finishes. Pop a
+  // green-tick card over the blurred page (same <dialog> chrome as the "Sabar ya"
+  // popup in app.js), then strip the param so a refresh never re-pops it.
+  claimDone();
+
+  function claimDone() {
+    var copy = {
+      egumis: "Your eGUMIS claim is all lined up. One sign-in on the official service and the money's on its way home.",
+      sara: "Your SARA groceries are sorted. Tap your MyKad at the verified kedai and RM 38 is as good as in the basket.",
+      peka: "Your PeKa B40 screening is lined up. Bring your MyKad to the clinic and you're all set — senang."
+    };
+    var done = new URLSearchParams(location.search).get("done");
+    if (!copy[done]) return;
+    history.replaceState(null, "", "dashboard.html");
+
+    var dlg = document.createElement("dialog");
+    dlg.className = "notready claim-done";
+    dlg.innerHTML =
+      '<div class="notready-inner">' +
+        '<div class="claim-done-mark" aria-hidden="true">✓</div>' +
+        "<h2>Nice one, " + esc(d.user.name) + " ✓</h2>" +
+        "<p>" + esc(copy[done]) + "</p>" +
+        '<button class="btn btn-primary" type="button" data-close>Back to my claims</button>' +
+      "</div>";
+    document.body.appendChild(dlg);
+    dlg.addEventListener("click", function (e) {
+      if (e.target === dlg || e.target.closest("[data-close]")) dlg.close();
+    });
+    dlg.showModal();
+  }
+
   // ---- helpers ----
   function n(v) { return Number(v).toLocaleString("en-MY"); }
 
