@@ -1,113 +1,161 @@
 # Tuntut
 
-**Find what you may be owed. Then finish the safest possible next step.**
+**Find what you may be owed, understand it, and practise the safest next step.**
 
-Tuntut is a synthetic, cache-first demo of claim orchestration. It separates simulated balances from
-estimates, explains one safe next action, and hands control back to the official service at every
-identity, declaration, document, clinical, or physical-presence gate.
-
-The companion follows OpenClicky's non-invasive pattern: the deterministic workflow remains authoritative,
-while voice and pointer controls only explain what is already on screen.
+Tuntut is a synthetic demonstration of a simpler way to navigate Malaysian assistance, benefits, and unclaimed-money services. It brings several programme results into one claim map, explains what each result means in plain language, and lets the user practise the next step before visiting an official service.
 
 **Live:** https://tuntut-blush.vercel.app
 
 Built for CodexMY · Team Cai Fun · Public Systems track.
 
-## Run it
+## How the demo works
 
+```text
+Choose a demo scenario
+        ↓
+Load simulated programme records
+        ↓
+Review the results as a short story
+        ↓
+Continue with a local demo session
+        ↓
+See the complete claim map
+        ↓
+Practise an eGUMIS, SARA, or PeKa B40 journey
 ```
+
+### 1. Choose a demo scenario
+
+The landing page never asks for a Malaysian identity number. The user chooses one of two safe scenarios:
+
+| Scenario | Result |
+|---|---|
+| **Complete demo** | Opens the complete story, claim map, and practice journeys |
+| **No-record demo** | Shows how the product explains an empty provider result without blaming the user |
+
+The short loading sequence represents checking multiple programmes. It reads only the fixtures stored with the demo; no government service is contacted.
+
+### 2. Understand the results
+
+The story view introduces one result at a time. It distinguishes between:
+
+- Support that is already available to use.
+- Money that would require an application or document.
+- Services that require an in-person or official next step.
+- Programmes where the selected demo scenario is not eligible.
+
+Amounts, eligibility decisions, provider responses, locations, and dates are all simulated. Status is communicated with a symbol, colour, and plain-language label rather than colour alone.
+
+### 3. Continue with a local demo session
+
+At the end of the story, the user starts a local demo session. This allows the claim map and practice progress to work without creating an account or contacting an identity provider.
+
+### 4. Review the claim map
+
+The dashboard groups results by what the user should do next:
+
+- **Ready to use** — support that would not need a new application.
+- **Needs a form** — a result that would require paperwork and an official submission.
+- **Needs one more step** — a clinic visit, identity check, or another action outside Tuntut.
+
+The total is derived from the individual eligible fixtures. Service values and unrevealed estimates are kept separate so they are not presented as spendable cash.
+
+### 5. Practise the next step
+
+The practice page contains three simulated service journeys. Each screen explains the current task and highlights the first incomplete required action. On forms with multiple fields, guidance moves in order only after the current field is valid. Continue buttons remain locked until the required fields or acknowledgements are complete.
+
+#### eGUMIS practice
+
+The user practises how to:
+
+1. Read a synthetic unclaimed-money result.
+2. Create a demo profile using synthetic details.
+3. Select the relevant record.
+4. Confirm synthetic payee information.
+5. Simulate preparing a supporting bank document.
+6. Review the declaration and approve the handoff.
+7. Stop before the official login and submission.
+
+No claim is submitted and no document is uploaded.
+
+#### SARA practice
+
+The user practises how to:
+
+1. Understand that the simulated balance is grocery credit rather than cash.
+2. Search with a coarse demo postcode.
+3. Review a synthetic participating shop.
+4. Prepare a short in-person shopping checklist.
+5. Stop before using a physical MyKad at a real checkout.
+
+No balance is used and no location is retained.
+
+#### PeKa B40 practice
+
+The user practises how to:
+
+1. Understand the simulated screening eligibility result.
+2. Search with a coarse demo postcode.
+3. Review a synthetic clinic result and its practical details.
+4. Prepare an in-person visit checklist.
+5. Stop before clinical verification and screening.
+
+No appointment is booked and no health information is stored.
+
+## Safety boundaries
+
+Tuntut explains and prepares; the user remains responsible for every official action.
+
+- Never enter a real identity number, password, PIN, OTP, bank number, medical detail, or exact location.
+- No fixture represents a real person, provider response, balance, eligibility decision, shop, or clinic.
+- No official form, declaration, appointment, purchase, or claim is submitted by this demo.
+- Identity checks, declarations, original documents, clinical decisions, and physical visits always remain human-controlled handoff points.
+- Completing a practice journey means the user understands the next action; it does not mean the real-world task is complete.
+
+## Run locally
+
+Open the application directly:
+
+```bash
 open app/index.html
 ```
 
-No build step, no dependencies, no server. That's the whole thing.
+The core browser demo has no build step or package installation. Opening `index.html` starts a fresh run.
 
-## Try it
+## State and data
 
-| Type this | You get |
-|---|---|
-| **Ahmad · synthetic household** | Carousel → demo identity → claim map → guided practice |
-| **No-record demo** | The safe "nothing found" provider state |
+The demo uses local browser storage for its temporary flow state:
 
-## This is a prototype
+- Selected demo scenario.
+- Local demo-session status.
+- Progress within each practice journey.
 
-Please read this before drawing conclusions from the demo:
+Returning to the landing page resets the current run.
 
-- **Every amount and status is simulated.** No live provider or government portal is queried.
-- **The identity is synthetic.** No account is created and no Malaysian ID is needed.
-- **Guided practice is local and deterministic.** eGUMIS, SARA, and PeKa B40 flows keep working
-  without the optional voice service.
-- **No official credentials or sensitive documents belong here.** Never enter an IC, password,
-  OTP, bank number, medical detail, or exact location in the demo.
+All fixtures live in `app/data/tuntut-data.js`. The shared runtime reads and freezes that object, derives totals from the scheme records, and exposes the same result data to the story and dashboard. Nothing in the browser writes back to the fixture file.
 
-## Layout
+## Project layout
 
-```
+```text
 app/
-├── index.html · story.html · dashboard.html · guide.html · no-results.html
-├── api/elevenlabs-signed-url.js  ← server-only voice credential exchange
-├── data/tuntut-data.js   ← the single source of truth. Change numbers here.
-└── assets/               theme.css + per-page css/js
+├── index.html          demo-scenario selection
+├── story.html          plain-language result walkthrough
+├── dashboard.html      complete claim map
+├── guide.html          simulated service practice
+├── no-results.html     empty provider-result state
+├── data/
+│   └── tuntut-data.js  shared synthetic fixtures
+└── assets/
+    ├── theme.css       shared design system
+    ├── app.js          state, calculations, and route guards
+    └── page files      page-specific styles and behaviour
 ```
 
-## Optional ElevenLabs voice guide
+## Prototype limits
 
-The visual guide and device speech fallback require no setup. For the realtime ElevenLabs agent,
-deploy `app/` on Vercel and set `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID` from
-`app/.env.example`. The API key is read only by the serverless function and is never shipped to the browser.
-
-Configure the ElevenLabs agent as private with authentication enabled. Runtime prompt and first-message
-overrides are intentionally not required, so a restricted agent works without weakening its security settings.
-Use this agent prompt:
-
-> You are the Tuntut voice guide for a non-technical Malaysian user. Use plain, calm, short sentences.
-> Explain only the current synthetic practice workflow. Never request an IC, password, PIN, OTP, bank
-> number, medical detail, or exact location. Never claim that an amount or eligibility is real. You cannot
-> advance the workflow or skip a declaration, identity, document, clinical, or physical-presence gate. Call
-> `getCurrentGuideStep` before step-specific advice. Call `highlightCurrentAction` when the user asks where
-> to click.
-
-Set a short first message such as “Hi, I’m your Tuntut guide. Which step would you like help with?” and add
-these read-only client tools:
-
-- `getCurrentGuideStep` — no parameters; returns the current deterministic step.
-- `highlightCurrentAction` — no parameters; points at the current on-screen action.
-
-The voice agent intentionally has no tool that advances a step, switches a platform, submits a form,
-or bypasses a human gate. Use a scope-restricted API key with a low credit quota.
-
-## TODO: integrate the guide into the latest UI
-
-When another branch contains newer landing, story, or dashboard work, carry the guide as an isolated
-feature instead of replacing those pages.
-
-Required guide files:
-
-- `app/guide.html`
-- `app/assets/guide.css`
-- `app/assets/guide.js`
-- `app/api/elevenlabs-signed-url.js`
-- `app/.env.example` (configuration reference only; never commit the real `.env`)
-
-Keep the newer branch's `app/assets/app.js`, `app/assets/theme.css`, and
-`app/data/tuntut-data.js`. The guide expects that shared runtime to expose `Tuntut.authed`,
-`Tuntut.guard()`, `Tuntut.esc()`, and `Tuntut.topbar()`.
-
-Add the appropriate links to the latest dashboard or navigation:
-
-- `guide.html?platform=egumis`
-- `guide.html?platform=sara`
-- `guide.html?platform=peka`
-
-For Vercel voice support, configure `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`. Without them,
-the deterministic pointer, form rules, written guidance, and device-speech fallback still work.
-Direct guide access also follows the existing demo authentication guard and redirects to `index.html`
-until `Tuntut.authed` is true.
-
-`app/README.md` has the detail: the data model, why `worth` and `rm` are different, the status
-system, and the accessibility rules behind the palette.
-
-## A note on `info/`
-
-The research, design explorations and team notes live in `info/`, which is intentionally **not**
-published — it contains personal data gathered during live testing, and internal notes that were
-never written for an audience. It stays local on purpose.
+- Programme records are cached fixtures rather than live provider data.
+- Amounts, dates, opening hours, distances, and eligibility results are illustrative.
+- The demo session is local and does not create an account.
+- Search results do not use live geolocation.
+- Supporting-document actions are simulations.
+- Official services may change their fields, rules, or order independently of this demo.
