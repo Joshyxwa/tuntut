@@ -4,7 +4,7 @@
 
   // Sign-up is a modal on the last carousel slide now, so there's no auth page
   // to bounce to — send them back to the front door for a clean run.
-  if (Tuntut.guard(Tuntut.authed, "index.html")) return;
+  if (Tuntut.guard(Tuntut.authed, "/")) return;
 
   var d = Tuntut.data;
   var t = Tuntut.totals;
@@ -12,7 +12,7 @@
 
   // ---- topbar, with the toggle back to the simple view ----
   document.getElementById("topbar").innerHTML =
-    Tuntut.topbar({ label: "Simple view →", href: "story.html" });
+    Tuntut.topbar({ label: "Simple view →", href: "/story" });
 
   // ---- hero ----
   var minis = d.schemes.filter(function (s) { return s.mini; });
@@ -24,14 +24,17 @@
       Tuntut.split() +
       '<div class="cta-row">' +
         '<a class="btn btn-primary" href="#">Claim ' + Tuntut.rm(t.needsApplying) + " →</a>" +
-        '<a class="btn btn-ghost" href="story.html">How this works</a>' +
       "</div>" +
     "</div>" +
     '<div class="mini">' +
       minis.map(function (s) {
-        return '<div class="row"><span class="k">' + esc(s.mini.label) + "</span>" +
-          '<span class="v num' + (s.mini.pos ? " pos" : "") + (s.mini.bad ? " bad" : "") + '">' +
-          esc(s.mini.value || miniValue(s)) + "</span></div>";
+        // A ringgit figure shows the figure; anything else shows a status pill
+        // (glyph + word) so the row never leans on colour alone.
+        var right = s.mini.pill
+          ? tag(s)
+          : '<span class="v num' + (s.mini.pos ? " pos" : "") + '">' +
+              esc(s.mini.value || miniValue(s)) + "</span>";
+        return '<div class="row"><span class="k">' + esc(s.mini.label) + "</span>" + right + "</div>";
       }).join("") +
     "</div>";
 

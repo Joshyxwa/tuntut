@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  if (Tuntut.guard(Tuntut.ic, "index.html")) return;
+  if (Tuntut.guard(Tuntut.ic, "/")) return;
 
   var e = Tuntut.data.empty;
 
@@ -17,6 +17,6 @@
       "<h2>" + Tuntut.esc(e.title) + "</h2>" +
       "<p>" + Tuntut.esc(e.line) + "</p>" +
       '<p class="foot-line">' + Tuntut.esc(e.foot) + "</p>" +
-      '<a class="btn btn-primary" href="index.html" style="margin-top:20px">' + Tuntut.esc(e.cta) + "</a>" +
+      '<a class="btn btn-primary" href="/" style="margin-top:20px">' + Tuntut.esc(e.cta) + "</a>" +
     "</div>";
 })();

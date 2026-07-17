@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tuntut — find money the government owes you</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,20 +20,25 @@
   </div>
 </noscript>
 
-<main class="entry" id="entry">
+<main class="entry entry--hero" id="entry">
+  <!-- Full-bleed hero photograph + scrim; all copy sits on top. -->
+  <div class="entry-photo" role="img" aria-label="A woman at her kitchen table opening a letter"></div>
+  <div class="entry-scrim"></div>
+
   <div class="entry-inner">
 
     <!-- idle: the ask -->
     <div class="idle">
-      <span class="wordmark">Tun<b>tut</b></span>
-      <h1>Find the money the government already owes you.</h1>
+      <span class="brand"><img class="brand-mark" src="assets/logo-white.svg" alt=""><span class="wordmark">Tun<b>tut</b></span></span>
+      <h1>You've got unclaimed money sitting somewhere. Time to bring it home.</h1>
       <p class="lede">Enter your IC. We check every scheme in your name and show you what's there — <b>before</b> you sign in to anything.</p>
 
       <form class="field" id="ic-form" autocomplete="off" novalidate>
-        <!-- Placeholder shows the SHAPE of an IC, never digits: a real-looking
-             number is someone's real number, and it invites people to type it back. -->
-        <input id="ic" name="ic" inputmode="numeric" placeholder="XXXXXX-XX-XXXX"
-               aria-label="Your IC number" maxlength="14">
+        <!-- Prototype hint, not a real IC shape: telling testers "any 12 digits"
+             invites no one to type a real number, and keeps the demo frictionless. -->
+        <input id="ic" name="ic" inputmode="numeric" placeholder="Type any 12 digits to try it"
+               aria-label="Your IC number" maxlength="14"
+               spellcheck="false" autocorrect="off" autocapitalize="off">
         <button class="btn btn-primary" type="submit">Check my IC →</button>
       </form>
       <p class="err" id="err" role="alert"></p>

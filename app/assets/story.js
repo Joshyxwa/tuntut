@@ -3,13 +3,13 @@
   "use strict";
 
   // No IC means you skipped the front door.
-  if (Tuntut.guard(Tuntut.ic, "index.html")) return;
+  if (Tuntut.guard(Tuntut.ic, "/")) return;
 
   var d = Tuntut.data;
   var t = Tuntut.totals;
 
   document.getElementById("topbar").innerHTML =
-    Tuntut.topbar(Tuntut.authed ? { label: "Dashboard →", href: "dashboard.html" } : null);
+    Tuntut.topbar(Tuntut.authed ? { label: "Dashboard →", href: "/dashboard" } : null);
 
   // ---- build the slides ----
   var slides = [];
@@ -157,7 +157,7 @@
     sheetEl.classList.add("working");
     setTimeout(function () {
       Tuntut.authed = true;
-      location.href = "dashboard.html";
+      location.href = "/dashboard";
     }, LOAD_MS);
   }
 

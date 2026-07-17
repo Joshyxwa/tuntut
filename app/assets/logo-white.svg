@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="95 85 480 510" fill="none" role="img" aria-label="Tuntut">
+  <title>Tuntut</title>
+  <path fill="#fff" d="M250 310H160C125 310 105 290 105 255V175C105 125 135 95 185 95H505C535 95 555 115 555 145C555 178 532 200 500 200H260C238 200 225 213 225 235V310Z"/>
+  <path fill="#fff" stroke="#000" stroke-opacity=".18" stroke-width="14" stroke-linejoin="round" d="M235 225H520C550 225 565 245 565 275C565 308 543 330 510 330H390V540C390 567 372 585 345 585H315C288 585 270 567 270 540V330H235C205 330 185 308 185 278C185 247 205 225 235 225Z"/>
+</svg>

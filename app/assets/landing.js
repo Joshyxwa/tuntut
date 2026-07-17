@@ -21,7 +21,7 @@
 
     var digits = input.value.replace(/\D/g, "");
     if (digits.length !== 12) {
-      err.textContent = "An IC is 12 digits — XXXXXX-XX-XXXX.";
+      err.textContent = "Enter 12 digits — any number works to try it.";
       input.focus();
       return;
     }
@@ -51,7 +51,7 @@
     // The demo IC that turns up nothing — see README.
     var empty = Tuntut.ic === Tuntut.data.demo.emptyIc;
     setTimeout(function () {
-      location.href = empty ? "no-results.html" : "story.html";
+      location.href = empty ? "/no-results" : "/story";
     }, LOAD_MS);
   }
 })();

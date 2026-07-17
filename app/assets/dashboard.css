@@ -20,7 +20,7 @@ body{padding-bottom:60px}
 
 /* ---- hero breakdown list ---- */
 .mini{display:flex; flex-direction:column; gap:2px}
-.mini .row{display:flex; align-items:baseline; justify-content:space-between; gap:14px; padding:11px 0;
+.mini .row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:11px 0;
   border-bottom:var(--hairline) solid var(--line-2)}
 .mini .row:last-child{border-bottom:0}
 .mini .k{color:var(--muted); font-size:13.5px}
@@ -53,6 +53,10 @@ body{padding-bottom:60px}
 
 @media (max-width:820px){
   .hero{grid-template-columns:1fr; gap:24px}
+  /* Stacked, the breakdown list drops under the CTA and just repeats the cards
+     below (and surfaces the PeKa/eKasih/mySalam flags). Lead with the number +
+     one action instead. Desktop keeps the two-column hero with the full list. */
+  .hero .mini{display:none}
   .grid{grid-template-columns:1fr 1fr}
   .claim{grid-template-columns:1fr}
 }

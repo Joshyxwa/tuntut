@@ -151,7 +151,9 @@ window.TUNTUT_DATA = {
       desc: "Your income record puts you outside the B40 band this scheme covers. Nothing you did wrong — it just isn't for you.",
       source: "mysalam",
       link: { label: "Why not? →", href: "#" },
-      mini: { label: "mySalam — B40 cover", value: "Not eligible", bad: true },
+      // Pill, not bare text: "Not eligible" in red is colour carrying meaning
+      // alone. The pill adds the ✕ glyph + word, so it survives greyscale.
+      mini: { label: "mySalam — B40 cover", pill: true },
       simple: {
         kicker: "One you don't have",
         title: "You're not covered by mySalam",
@@ -173,6 +175,7 @@ window.TUNTUT_DATA = {
       status: "warn", statusLabel: "Action needed",
       source: "pekab40",
       link: { label: "We'll help you book →", href: "#" },
+      mini: { label: "PeKa B40 — free screening", pill: true },
       simple: {
         kicker: "One visit away",
         title: "A free health screening",
@@ -193,6 +196,7 @@ window.TUNTUT_DATA = {
       caption: "hardship top-up estimate",
       status: "warn", statusLabel: "Locked",
       lock: { tag: "Connect to reveal", text: "One more MyDigital ID check unlocks your eKasih record.", cta: "Connect →" },
+      mini: { label: "eKasih — hardship top-up", pill: true },
       simple: {
         kicker: "Still locked",
         title: "One more check to go",
@@ -201,6 +205,14 @@ window.TUNTUT_DATA = {
       }
     }
   ],
+
+  // Shown when a not-yet-built button is tapped. Every dead control in the
+  // prototype is <a href="#">; app.js catches them all and opens this.
+  notReady: {
+    title: "Sabar ya",
+    body: "Still building this one. Our team runs on kopi O and optimism. Coming very soon.",
+    close: "OK lah"
+  },
 
   // The sign-up modal at the end of the carousel. Mock — see `mock` below.
   auth: {

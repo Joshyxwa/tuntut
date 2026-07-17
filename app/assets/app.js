@@ -134,7 +134,7 @@
     /** Shared topbar chips + optional view-toggle. */
     topbar: function (toggle) {
       var u = data.user;
-      return '<span class="wordmark">Tun<b>tut</b></span>' +
+      return '<a class="brand" href="/"><img class="brand-mark" src="assets/logo.svg" alt=""><span class="wordmark">Tun<b>tut</b></span></a>' +
         '<span class="chip"><span class="dot"></span> IC <span class="num">' + Tuntut.esc(u.icMasked) + "</span></span>" +
         '<span class="chip hide-sm">Last checked <span class="num">' + Tuntut.esc(u.lastChecked) + "</span></span>" +
         '<span class="spacer"></span>' +
@@ -152,4 +152,36 @@
   }
 
   window.Tuntut = Tuntut;
+
+  /* One overlay for every not-yet-built action. Each dead control in the
+     prototype is <a href="#"> and every live link is a real filename, so one
+     delegated listener catches them all and can never swallow a real link.
+     The <dialog> is built once, on first use, and reused after. */
+  function notReadyDialog() {
+    var dlg = document.getElementById("tuntut-notready");
+    if (dlg) return dlg;
+    var c = data.notReady;
+    dlg = document.createElement("dialog");
+    dlg.id = "tuntut-notready";
+    dlg.className = "notready";
+    dlg.innerHTML =
+      '<div class="notready-inner"><div class="notready-emoji" aria-hidden="true">☕</div>' +
+        "<h2>" + Tuntut.esc(c.title) + "</h2>" +
+        "<p>" + Tuntut.esc(c.body) + "</p>" +
+        '<button class="btn btn-primary" type="button" data-close>' + Tuntut.esc(c.close) + "</button>" +
+      "</div>";
+    document.body.appendChild(dlg);
+    dlg.addEventListener("click", function (e) {
+      // the button, or the backdrop (a click whose target is the dialog itself)
+      if (e.target === dlg || e.target.closest("[data-close]")) dlg.close();
+    });
+    return dlg;
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#"]');
+    if (!a) return;
+    e.preventDefault();
+    notReadyDialog().showModal();
+  });
 })();
