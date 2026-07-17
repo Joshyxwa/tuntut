@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuntut — guided practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/theme.css">
+<link rel="stylesheet" href="assets/guide.css">
+</head>
+<body>
+
+<header class="topbar" id="topbar"></header>
+
+<main class="guide-wrap">
+  <section class="practice-head anim">
+    <div>
+      <p class="eyebrow">Safe practice mode</p>
+      <h1>Learn the next step before visiting the real service.</h1>
+      <p>Everything on this page is synthetic. You can practise freely—no form is sent and no official account is touched.</p>
+    </div>
+    <span class="mode-badge">🧪 Simulated</span>
+  </section>
+
+  <nav class="platform-tabs anim" id="platform-tabs" aria-label="Practice a service"></nav>
+
+  <div class="training-grid">
+    <section class="portal-shell anim" aria-labelledby="portal-title">
+      <header class="portal-head">
+        <div>
+          <p class="portal-kicker" id="portal-kicker"></p>
+          <h2 id="portal-title"></h2>
+        </div>
+        <button class="reset-link" id="reset-guide" type="button">Start over</button>
+      </header>
+      <div class="truth-row" id="truth-row"></div>
+      <div class="step-progress" aria-label="Practice progress">
+        <i id="step-progress-bar"></i>
+      </div>
+      <div class="portal-screen" id="portal-screen" aria-live="polite"></div>
+    </section>
+
+    <aside class="buddy anim" aria-labelledby="buddy-title">
+      <div class="buddy-status">
+        <span class="buddy-orb" aria-hidden="true"><i></i></span>
+        <div>
+          <p id="buddy-state">Ready to guide</p>
+          <h2 id="buddy-title">Tuntut Guide</h2>
+        </div>
+      </div>
+
+      <div class="buddy-message">
+        <p class="buddy-step" id="buddy-step"></p>
+        <p id="buddy-copy"></p>
+        <p class="buddy-next" id="buddy-next" role="status"></p>
+      </div>
+
+      <div class="buddy-actions">
+        <button class="btn btn-primary" id="start-voice" type="button">🎙 Start voice guide</button>
+        <button class="btn btn-ghost" id="read-step" type="button">🔊 Read this step</button>
+      </div>
+      <p class="voice-note" id="voice-note" role="status">The on-screen guide works without voice. If started, microphone audio is sent to ElevenLabs.</p>
+      <div id="elevenlabs-host"></div>
+
+      <ol class="mini-steps" id="mini-steps"></ol>
+
+      <div class="privacy-note">
+        <b>Your practice stays safe.</b>
+        <span>Never say or type a real IC, password, PIN, OTP, bank number, or medical detail here.</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="guide-pointer" id="guide-pointer" aria-hidden="true">
+  <span></span><b>Click here</b>
+</div>
+
+<script src="data/tuntut-data.js" defer></script>
+<script src="assets/app.js" defer></script>
+<script src="assets/guide.js" defer></script>
+</body>
+</html>
