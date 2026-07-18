@@ -114,13 +114,13 @@ Tuntut explains and prepares; the user remains responsible for every official ac
 
 ## Run locally
 
-Open the application directly:
+The app uses Vercel clean URLs (`/dashboard`, `/story`), so it needs a server that resolves extensionless paths. Opening the files directly (`open app/index.html`, i.e. `file://`) or serving with a bare `python -m http.server` will 404 on the first navigation. Use `serve`, whose static routing matches Vercel's:
 
 ```bash
-open app/index.html
+npx serve app
 ```
 
-The core browser demo has no build step or package installation. Opening `index.html` starts a fresh run.
+Then open the printed `http://localhost:3000`. There's no build step — this only mirrors the deployment's `cleanUrls` behaviour locally; nothing about the Vercel setup changes.
 
 ## State and data
 
