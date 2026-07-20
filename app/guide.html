@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tuntut — guided practice</title>
+<title>Tuntut — step-by-step guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,14 +20,14 @@
 <main class="guide-wrap">
   <section class="practice-head anim">
     <div>
-      <p class="eyebrow">Safe practice mode</p>
+      <p class="eyebrow">Guided walkthrough</p>
       <h1>Learn the next step before visiting the real service.</h1>
-      <p>Everything on this page is synthetic. You can practise freely—no form is sent and no official account is touched.</p>
+      <p>This is a guided walkthrough. No form is sent and no official account is touched.</p>
     </div>
-    <span class="mode-badge">🧪 Simulated</span>
+    <span class="mode-badge">📋 Guided</span>
   </section>
 
-  <nav class="platform-tabs anim" id="platform-tabs" aria-label="Practice a service"></nav>
+  <nav class="platform-tabs anim" id="platform-tabs" aria-label="Choose a service"></nav>
 
   <div class="training-grid">
     <section class="portal-shell anim" aria-labelledby="portal-title">
@@ -36,7 +39,7 @@
         <button class="reset-link" id="reset-guide" type="button">Start over</button>
       </header>
       <div class="truth-row" id="truth-row"></div>
-      <div class="step-progress" aria-label="Practice progress">
+      <div class="step-progress" aria-label="Your progress">
         <i id="step-progress-bar"></i>
       </div>
       <div class="portal-screen" id="portal-screen" aria-live="polite"></div>
@@ -58,7 +61,6 @@
       </div>
 
       <div class="buddy-actions">
-        <button class="btn btn-primary" id="start-voice" type="button">🎙 Start voice guide</button>
         <button class="btn btn-ghost" id="read-step" type="button">🔊 Read this step</button>
       </div>
       <p class="voice-note" id="voice-note" role="status">The on-screen guide works without voice. If started, microphone audio is sent to ElevenLabs.</p>
@@ -67,12 +69,22 @@
       <ol class="mini-steps" id="mini-steps"></ol>
 
       <div class="privacy-note">
-        <b>Your practice stays safe.</b>
+        <b>Your information stays safe.</b>
         <span>Never say or type a real IC, password, PIN, OTP, bank number, or medical detail here.</span>
       </div>
     </aside>
   </div>
 </main>
+
+<div class="voice-launcher" aria-label="Voice guide controls">
+  <label for="voice-language">Voice</label>
+  <select id="voice-language" aria-label="Voice guide language">
+    <option value="en-MY">English</option>
+    <option value="ms-MY">Bahasa Melayu</option>
+    <option value="zh-CN">中文</option>
+  </select>
+  <button class="btn btn-primary" id="start-voice" type="button">🎙 Start voice guide</button>
+</div>
 
 <div class="guide-pointer" id="guide-pointer" aria-hidden="true">
   <span></span><b>Click here</b>

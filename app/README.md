@@ -4,6 +4,18 @@ A clickable prototype of the Tuntut flow. No build step, no dependencies, no ser
 
 **Run it:** double-click `index.html` (or `open app/index.html`). That's it.
 
+## Realtime voice guide
+
+The practice guide uses an authenticated ElevenLabs agent and falls back to the browser's speech synthesis. Deploy `app/` to Vercel and set `ELEVENLABS_API_KEY` and `ELEVENLABS_AGENT_ID`. In ElevenLabs, require authentication, allowlist the production domain, add English, Malay, and Simplified Chinese as supported languages, and enable only the **Language** client override under Security. Keep first messages and voices in each language preset; the browser deliberately does not override those fields. Add the three voices listed below to the workspace, then assign each one in that language's voice settings. Create only one client tool: `getCurrentGuideStep` with no parameters and **Wait for response** enabled. Paste [`elevenlabs-agent-prompt.md`](elevenlabs-agent-prompt.md) into the agent system prompt. Its mandatory per-turn tool call continuously refreshes the current browser step without giving the agent permission to act. Restrict the API key to the agent endpoints and set a low workspace credit limit.
+
+| Language | Voice | Voice ID |
+|---|---|---|
+| Malaysian English | Christine — calm, professional Malaysian/Singaporean English | `Y7xQSS5ZtS4xv4VJotWd` |
+| Bahasa Melayu | Athira — warm, encouraging Malaysian Malay | `BeIxObt4dYBRJLYoe1hU` |
+| Mandarin Chinese | Chen — warm, conversational Mandarin | `4NQthjVhIGGVfL3Si000` |
+
+The selected language is fixed when the widget is created; reload the guide to start a call in another language. The signed-URL function applies a small per-instance request limit as defense in depth. Keep the ElevenLabs domain allowlist and workspace quota enabled because serverless instances do not share rate-limit memory.
+
 For the narrative version of this flow, read [`../info/user-journey.md`](../info/user-journey.md).
 
 ## The flow
