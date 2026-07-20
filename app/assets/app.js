@@ -3,6 +3,20 @@
 (function () {
   "use strict";
 
+  // This is a rapidly changing demo: discard service-worker and Cache API state.
+  if ("serviceWorker" in navigator)
+    navigator.serviceWorker.getRegistrations().then(function (items) {
+      items.forEach(function (item) {
+        item.unregister();
+      });
+    });
+  if ("caches" in window)
+    caches.keys().then(function (keys) {
+      keys.forEach(function (key) {
+        caches.delete(key);
+      });
+    });
+
   // Freeze the data all the way down — the app reads, never writes.
   function deepFreeze(o) {
     Object.getOwnPropertyNames(o).forEach(function (k) {
